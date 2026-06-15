@@ -54,7 +54,7 @@ sp_size=8
 use_dynamic_bsz=True
 actor_ppo_max_token_len=$(((max_prompt_length + max_response_length)))
 infer_ppo_max_token_len=$(((max_prompt_length + max_response_length)))
-offload=False
+offload=True
 
 max_num_batched_tokens=$((max_prompt_length + max_response_length))
 
