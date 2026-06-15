@@ -54,7 +54,7 @@ sp_size=8
 use_dynamic_bsz=True
 actor_ppo_max_token_len=$(((max_prompt_length + max_response_length)))
 infer_ppo_max_token_len=$(((max_prompt_length + max_response_length)))
-offload=True
+offload=False
 
 max_num_batched_tokens=$((max_prompt_length + max_response_length))
 
@@ -65,7 +65,7 @@ gen_tp=4
 train_tp=4
 train_ep=2
 train_etp=2  # expert tensor parallel: etp*ep*pp must divide world_size (8)
-train_pp=2
+train_pp=1
 train_cp=1
 
 ray job submit --no-wait --runtime-env="${RUNTIME_ENV}" \
@@ -154,7 +154,7 @@ ray job submit --no-wait --runtime-env="${RUNTIME_ENV}" \
     reward.reward_kwargs.overlong_buffer_cfg.len=${overlong_buffer_len} \
     reward.reward_kwargs.overlong_buffer_cfg.penalty_factor=${overlong_penalty_factor} \
     reward.reward_kwargs.max_resp_len=${max_response_length} \
-    trainer.logger=['console'] \
+    trainer.logger=['console','wandb'] \
     trainer.project_name="${project_name}" \
     trainer.experiment_name="${exp_name}" \
     trainer.n_gpus_per_node=8 \
