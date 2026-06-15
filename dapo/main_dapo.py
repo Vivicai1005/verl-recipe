@@ -23,7 +23,12 @@ import hydra
 import ray
 
 from verl.experimental.reward_loop import migrate_legacy_reward_impl
-from verl.trainer.main_ppo import TaskRunner, create_rl_dataset, create_rl_sampler, run_ppo
+from verl.trainer.main_ppo import run_ppo
+from verl.trainer.main_ppo_v0 import TaskRunner as _RemoteTaskRunner
+# main_ppo_v0.TaskRunner is @ray.remote-decorated in this verl; recover the
+# plain class so the recipe can subclass it and apply ray.remote itself.
+TaskRunner = _RemoteTaskRunner.__ray_metadata__.modified_class
+from verl.trainer.ppo.utils import create_rl_dataset, create_rl_sampler
 from verl.trainer.ppo.utils import need_critic, need_reference_policy
 from verl.utils.config import validate_config
 from verl.utils.device import auto_set_device
