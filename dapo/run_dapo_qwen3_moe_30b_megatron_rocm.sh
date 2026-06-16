@@ -1,7 +1,7 @@
 #!/bin/bash
 
 project_name='DAPO'
-exp_name='DAPO-Qwen3-30B-megatron'
+exp_name=${EXPERIMENT_NAME:-'DAPO-Qwen3-30B-megatron'}
 
 adv_estimator=grpo
 
