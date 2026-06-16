@@ -62,8 +62,8 @@ max_num_batched_tokens=$((max_prompt_length + max_response_length))
 gen_tp=4
 
 # Megatron backen
-train_tp=2
-train_ep=8
+train_tp=4
+train_ep=4
 train_etp=1  # expert tensor parallel: etp*ep*pp must divide world_size (8)
 train_pp=1
 train_cp=1
