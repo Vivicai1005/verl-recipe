@@ -51,7 +51,7 @@ top_k=-1 # 0 for HF rollout, -1 for vLLM rollout
 
 # Performance Related Parameter
 sp_size=8
-use_dynamic_bsz=True
+use_dynamic_bsz=False
 actor_ppo_max_token_len=$(((max_prompt_length + max_response_length)))
 infer_ppo_max_token_len=$(((max_prompt_length + max_response_length)))
 offload=True
@@ -96,7 +96,7 @@ ray job submit --no-wait --runtime-env="${RUNTIME_ENV}" \
     algorithm.filter_groups.enable=${enable_filter_groups} \
     algorithm.filter_groups.max_num_gen_batches=${max_num_gen_batches} \
     algorithm.filter_groups.metric=${filter_groups_metric} \
-    actor_rollout_ref.model.use_remove_padding=True \
+    actor_rollout_ref.model.use_remove_padding=False \
     actor_rollout_ref.model.use_fused_kernels=True \
     actor_rollout_ref.actor.use_dynamic_bsz=${use_dynamic_bsz} \
     actor_rollout_ref.actor.ppo_micro_batch_size_per_gpu=1 \
